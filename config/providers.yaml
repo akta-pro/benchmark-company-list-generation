@@ -1,0 +1,12 @@
+providers:
+  - id: anthropic/claude-sonnet-5
+    type: openrouter
+    model: anthropic/claude-sonnet-5
+
+  - id: openai/gpt-5.6-luna
+    type: openrouter
+    model: openai/gpt-5.6-luna
+
+  - id: openai/gpt-5.6-terra
+    type: openrouter
+    model: openai/gpt-5.6-terra

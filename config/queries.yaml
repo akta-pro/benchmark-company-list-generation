@@ -1,0 +1,331 @@
+# Each query runs once per variant; a variant only sets the tool flags.
+# fact_questions build each company's fact pack ({{company_name}} and
+# {{website}} are filled in), which the judge in config/validation/ reads.
+queries:
+  - id: bootstrapped_hvac
+    text: >
+      Find bootstrapped (founder-operated) HVAC service, maintenance & repair companies in the US with sub $10M valuation. Return a list of top 100 companies sorted based on revenue.
+    structured_output: list_gen
+    validation_prompt: q1.prompt.txt
+    validation_schema: q1.schema.json
+    variants:
+      - name: web_search
+        use_web_search: true
+        max_web_searches: 10
+      - name: akta
+        use_akta: true
+    fact_questions:
+      - "Has this company raised venture capital? {{company_name}} ({{website}})"
+      - "What services does this company provide? {{company_name}} ({{website}})"
+      - "Where is this company located? {{company_name}} ({{website}})"
+      - "Get information about the valuation of this company {{company_name}} ({{website}})"
+      - "Get information about the revenue of this company {{company_name}} ({{website}})"
+
+  - id: sea_fintech_seriesb
+    text: >
+      Find Series B or later-stage funded fintech and payments companies in Southeast Asia with at least some AI capability. Return a list of 100 companies sorted based on funding.
+    structured_output: list_gen
+    validation_prompt: q1.prompt.txt
+    validation_schema: q1.schema.json
+    variants:
+      - name: web_search
+        use_web_search: true
+        max_web_searches: 10
+      - name: akta
+        use_akta: true
+    fact_questions:
+      - "What is the funding stage of this company? {{company_name}} ({{website}})"
+      - "What product or services does this company provide? {{company_name}} ({{website}})"
+      - "Where is this company located? {{company_name}} ({{website}})"
+      - "Get information about the technical capabilities of the products offered by this company. Does it use AI? {{company_name}} ({{website}})"
+      - "Get information about the funding raised by this company {{company_name}} ({{website}})"
+
+  - id: pe_backed_b2b_services
+    text: >
+      Find PE-backed B2B professional services businesses (legal, accounting, consulting) in the US and Canada having revenue between $25M to $100M. Return a list of 100 companies sorted based on revenue.
+    structured_output: list_gen
+    validation_prompt: q1.prompt.txt
+    validation_schema: q1.schema.json
+    variants:
+      - name: web_search
+        use_web_search: true
+        max_web_searches: 10
+      - name: akta
+        use_akta: true
+    fact_questions:
+      - "Who owns this company? {{company_name}} ({{website}})"
+      - "What services does this company provide? {{company_name}} ({{website}})"
+      - "Who are the customers of this company? {{company_name}} ({{website}})"
+      - "Where is the company headquartered? {{company_name}} ({{website}})"
+      - "Extract information about the revenue of this company. {{company_name}} ({{website}})"
+
+  - id: india_vertical_marketplaces
+    text: >
+      Find Indian vertical/specialist marketplaces with a network-effects moat. Return a list of 100 companies sorted based on funding.
+    structured_output: list_gen
+    validation_prompt: q1.prompt.txt
+    validation_schema: q1.schema.json
+    variants:
+      - name: web_search
+        use_web_search: true
+        max_web_searches: 10
+      - name: akta
+        use_akta: true
+    fact_questions:
+      - "Where is this company located? {{company_name}} ({{website}})"
+      - "Explain what this company does. {{company_name}} ({{website}})"
+      - "What are some of the products/ services offered by this company? {{company_name}} ({{website}})"
+      - "Get information about the funding raised by this company {{company_name}} ({{website}})"
+
+  - id: us_ai_native_microsoft_customers
+    text: >
+      Find US AI-native companies that sell to Microsoft. Return a list of 100 companies sorted based on revenue.
+    structured_output: list_gen
+    validation_prompt: q1.prompt.txt
+    validation_schema: q1.schema.json
+    variants:
+      - name: web_search
+        use_web_search: true
+        max_web_searches: 10
+      - name: akta
+        use_akta: true
+    fact_questions:
+      - "Where is this company located? {{company_name}} ({{website}})"
+      - "What are the products and services offered by this company? {{company_name}} ({{website}})"
+      - "Is Microsoft a customer of this company? {{company_name}} ({{website}})"
+      - "Get information about the revenue of this company. {{company_name}} ({{website}})"
+
+  - id: a16z_backed_us_ai
+    text: >
+      Find a16z-backed AI-differentiated-or-higher companies in the US that were funded in the last 2 years. Return a list of 100 companies sorted based on funding.
+    structured_output: list_gen
+    validation_prompt: q1.prompt.txt
+    validation_schema: q1.schema.json
+    variants:
+      - name: web_search
+        use_web_search: true
+        max_web_searches: 10
+      - name: akta
+        use_akta: true
+    fact_questions:
+      - "Where is this company located? {{company_name}} ({{website}})"
+      - "Who are the investors in this company? {{company_name}} ({{website}})"
+      - "What product and services does this company offer? {{company_name}} ({{website}})"
+      - "What are some of the ai capabilities that this company has? {{company_name}} ({{website}})"
+
+  - id: uk_bootstrapped_msps
+    text: >
+      Find founder-owned/bootstrapped independent managed service providers (MSPs) in the UK with $5M to $10M revenue. Return a list of 100 companies sorted based on revenue.
+    structured_output: list_gen
+    validation_prompt: q1.prompt.txt
+    validation_schema: q1.schema.json
+    variants:
+      - name: web_search
+        use_web_search: true
+        max_web_searches: 10
+      - name: akta
+        use_akta: true
+    fact_questions:
+      - "Who owns this company? {{company_name}} ({{website}})"
+      - "Where is this company located? {{company_name}} ({{website}})"
+      - "What product and services does this company offer? {{company_name}} ({{website}})"
+      - "What is the revenue of this company? {{company_name}} ({{website}})"
+
+  - id: europe_ai_medical_imaging
+    text: >
+      Find private European AI-based medical imaging/signal-analysis software companies. Return a list of 100 companies sorted based on funding.
+    structured_output: list_gen
+    validation_prompt: q1.prompt.txt
+    validation_schema: q1.schema.json
+    variants:
+      - name: web_search
+        use_web_search: true
+        max_web_searches: 10
+      - name: akta
+        use_akta: true
+    fact_questions:
+      - "Where is the company located? {{company_name}} ({{website}})"
+      - "Is this a public or a private company? {{company_name}} ({{website}})"
+      - "What product and services does this company offer? {{company_name}} ({{website}})"
+      - "What is the total funding raised by {{company_name}} ({{website}})?"
+
+  - id: us_data_monetization_api
+    text: >
+      Find US data-driven monetization companies with a data advantage moat, offering a public API, that were funded in the last 3 years. Return a list of 100 companies sorted based on funding.
+    structured_output: list_gen
+    validation_prompt: q1.prompt.txt
+    validation_schema: q1.schema.json
+    variants:
+      - name: web_search
+        use_web_search: true
+        max_web_searches: 10
+      - name: akta
+        use_akta: true
+    fact_questions:
+      - "Where is this company located? {{company_name}} ({{website}})"
+      - "When was the company founded? {{company_name}} ({{website}})"
+      - "What are the funding rounds raised by this company? {{company_name}} ({{website}})"
+      - "What is the total funding raised by {{company_name}} ({{website}})?"
+      - "What product and services does this company offer? {{company_name}} ({{website}})"
+
+  - id: ai_legal_tech_global
+    text: >
+      Find AI-powered legal tech companies founded after 2010 that serve global markets. Return a list of 100 companies sorted based on funding.
+    structured_output: list_gen
+    validation_prompt: q1.prompt.txt
+    validation_schema: q1.schema.json
+    variants:
+      - name: web_search
+        use_web_search: true
+        max_web_searches: 10
+      - name: akta
+        use_akta: true
+    fact_questions:
+      - "What product/services does this company offers? {{company_name}} ({{website}})"
+      - "When was the company founded? {{company_name}} ({{website}})"
+      - "Does the company use AI or has AI capabilities? {{company_name}} ({{website}})"
+      - "What is the total funding raised by {{company_name}} ({{website}})?"
+      - "What markets does this company serve to? {{company_name}} ({{website}})"
+
+  - id: nordic_dutch_energy_storage
+    text: >
+      Find Nordic and Dutch energy storage hardware companies that have not raised funding in the last 12 months. Return a list of 100 companies sorted based on funding.
+    structured_output: list_gen
+    validation_prompt: q1.prompt.txt
+    validation_schema: q1.schema.json
+    variants:
+      - name: web_search
+        use_web_search: true
+        max_web_searches: 10
+      - name: akta
+        use_akta: true
+    fact_questions:
+      - "Where is this company located? {{company_name}} ({{website}})"
+      - "What are the products and services offered by this company? {{company_name}} ({{website}})"
+      - "What are the funding rounds raised by this company? {{company_name}} ({{website}})"
+      - "What is the total funding raised by {{company_name}} ({{website}})?"
+
+  - id: us_recent_unicorns
+    text: >
+      Find US venture-backed unicorns founded within the last 3 years. Return a list of 100 companies sorted based on funding.
+    structured_output: list_gen
+    validation_prompt: q1.prompt.txt
+    validation_schema: q1.schema.json
+    variants:
+      - name: web_search
+        use_web_search: true
+        max_web_searches: 10
+      - name: akta
+        use_akta: true
+    fact_questions:
+      - "Where is the company located? {{company_name}} ({{website}})"
+      - "Who are the investors in this company? {{company_name}} ({{website}})"
+      - "What is the estimated valuation of this company? {{company_name}} ({{website}})"
+      - "When was this company founded? {{company_name}} ({{website}})"
+      - "What is the total funding raised by {{company_name}} ({{website}})?"
+
+  - id: specialty_chemicals_corp_pe
+    text: >
+      Find corporate-owned or PE-owned specialty chemicals companies in the US and Western Europe with $50M to $500M revenue. Return a list of 100 companies sorted based on revenue.
+    structured_output: list_gen
+    validation_prompt: q1.prompt.txt
+    validation_schema: q1.schema.json
+    variants:
+      - name: web_search
+        use_web_search: true
+        max_web_searches: 10
+      - name: akta
+        use_akta: true
+    fact_questions:
+      - "What product/services does this company offers? {{company_name}} ({{website}})"
+      - "Where is this company located? {{company_name}} ({{website}})"
+      - "Who owns this company? {{company_name}} ({{website}})"
+      - "Get information about the revenue of this company. {{company_name}} ({{website}})"
+
+  - id: europe_software_accel_index
+    text: >
+      Find European software companies that raised $20M+ Series B, C or D rounds from Accel or Index Ventures. Return a list of 100 companies sorted based on funding.
+    structured_output: list_gen
+    validation_prompt: q1.prompt.txt
+    validation_schema: q1.schema.json
+    variants:
+      - name: web_search
+        use_web_search: true
+        max_web_searches: 10
+      - name: akta
+        use_akta: true
+    fact_questions:
+      - "Where is the company located? {{company_name}} ({{website}})"
+      - "What product or services does this company provide? {{company_name}} ({{website}})"
+      - "Get information about the funding raised by this company and its investors {{company_name}} ({{website}})"
+
+  - id: plg_usage_based_saas
+    text: >
+      Find Series C+ enterprise and B2B SaaS companies with a product-led-growth motion and usage-based pricing. Return a list of 100 companies sorted based on funding.
+    structured_output: list_gen
+    validation_prompt: q1.prompt.txt
+    validation_schema: q1.schema.json
+    variants:
+      - name: web_search
+        use_web_search: true
+        max_web_searches: 10
+      - name: akta
+        use_akta: true
+    fact_questions:
+      - "Get information about the funding raised by this company. {{company_name}} ({{website}})"
+      - "What product or services does this company provide? {{company_name}} ({{website}})"
+      - "Who are the customers of this company? {{company_name}} ({{website}})"
+      - "Get pricing related information for the product or services this company offers {{company_name}} ({{website}})"
+
+  - id: middle_east_proptech
+    text: >
+      Find Middle-east real estate or property-tech companies companies with $1M+ in funding. Return a list of 100 companies sorted based on funding.
+    structured_output: list_gen
+    validation_prompt: q1.prompt.txt
+    validation_schema: q1.schema.json
+    variants:
+      - name: web_search
+        use_web_search: true
+        max_web_searches: 10
+      - name: akta
+        use_akta: true
+    fact_questions:
+      - "Where is this company located? {{company_name}} ({{website}})"
+      - "What product or services does this company provide? {{company_name}} ({{website}})"
+      - "Get information about the funding raised by this company and its investors {{company_name}} ({{website}})"
+
+  - id: us_bootstrapped_vet_clinics
+    text: >
+      Find Founder-operated (bootstrapped) veterinary clinics in the US, established before 2000, with $5–10M revenue. Return a list of 100 companies sorted based on revenue.
+    structured_output: list_gen
+    validation_prompt: q1.prompt.txt
+    validation_schema: q1.schema.json
+    variants:
+      - name: web_search
+        use_web_search: true
+        max_web_searches: 10
+      - name: akta
+        use_akta: true
+    fact_questions:
+      - "Who owns this company? {{company_name}} ({{website}})"
+      - "What product or services does this company provide? {{company_name}} ({{website}})"
+      - "When was this company founded? {{company_name}} ({{website}})"
+      - "Get information about the revenue of this company. {{company_name}} ({{website}})"
+
+  - id: tiger_sequoia_led_us
+    text: >
+      Find US private companies where Tiger Global or Sequoia Capital were lead investors in a Series B+ round. Return a list of 100 companies sorted based on funding.
+    structured_output: list_gen
+    validation_prompt: q1.prompt.txt
+    validation_schema: q1.schema.json
+    variants:
+      - name: web_search
+        use_web_search: true
+        max_web_searches: 10
+      - name: akta
+        use_akta: true
+    fact_questions:
+      - "Where is this company located? {{company_name}} ({{website}})"
+      - "Get information about the owership status- public/ private {{company_name}} ({{website}})"
+      - "Who are the investors in this company? {{company_name}} ({{website}})"
+      - "Get information about all the funding rounds raised by this company {{company_name}} ({{website}})"
